@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-
+const reply = require('./reply-function');
 
 (async () => {
     const browser = await puppeteer.launch({
@@ -17,19 +17,7 @@ const puppeteer = require('puppeteer');
 
 
     await page.exposeFunction('handleNewMessage', async (text, id) => {
-        if (text.startsWith('Hoai Khong')) {
-            await page.waitForSelector('#' + id, {visible: true});
-            const replyTarget = await page.$('#' + id);
-            await new Promise(r => setTimeout(r, 1000));
-            await replyTarget.click({button: 'right'});
-            await page.waitForSelector('#message-reply', {visible: true});
-            await page.evaluate(() => {
-                const replyButton = document.getElementById('message-reply');
-                replyButton.click();
-            })
-            await page.type('.markup-eYLPri', '  chào bạn!');
-            await page.keyboard.press('Enter');
-        }
+        await reply(page, 'Hoai Khong', text, ' chao ban nhe', id);
     });
 
     await page.evaluate(() => {
