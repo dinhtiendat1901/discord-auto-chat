@@ -2,7 +2,7 @@ module.exports = async function (page, targetName, messageNeedReply, messageForR
     if (messageNeedReply.startsWith(targetName)) {
         await page.waitForSelector('#' + idMessageNeedReply, {visible: true});
         const replyTarget = await page.$('#' + idMessageNeedReply);
-        await new Promise(r => setTimeout(r, 1000));
+        await new Promise(r => setTimeout(r, 500));
         await replyTarget.click({button: 'right'});
         await page.waitForSelector('#message-reply', {visible: true});
         await page.evaluate(() => {
