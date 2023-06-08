@@ -6,7 +6,7 @@ module.exports = async function (page, functionName) {
         const observer = new MutationObserver(mutations => {
             for (const mutation of mutations) {
                 if (mutation.type === 'childList') {
-                    window[func](mutation.addedNodes.item(0).textContent, mutation.addedNodes.item(0).id);
+                    window[func](mutation.addedNodes.item(0).id);
                 }
             }
         });
