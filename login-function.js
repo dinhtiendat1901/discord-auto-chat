@@ -10,6 +10,5 @@ module.exports = async function (page, username, password) {
         await page.type('.inputDefault-Ciwd-S[name="password"]', password);
         await page.keyboard.press('Enter');
     } catch (e) {
-        console.log('No need login');
     }
 }
