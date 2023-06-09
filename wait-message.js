@@ -4,10 +4,9 @@ module.exports = async function (page, functionName) {
     await page.evaluate((func) => {
         const target = document.querySelector('[data-list-id="chat-messages"]');
         const observer = new MutationObserver(mutations => {
-            for (const mutation of mutations) {
-                if (mutation.type === 'childList') {
-                    window[func](mutation.addedNodes.item(0).id);
-                }
+            const mutation = mutations[mutations.length - 1];
+            if (mutation.type === 'childList') {
+                window[func](mutation.addedNodes.item(0).id);
             }
         });
         observer.observe(target, {childList: true});
