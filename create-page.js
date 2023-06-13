@@ -10,6 +10,7 @@ module.exports = async function (url, username, password, userDataDir) {
     });
     const page = await browser.newPage();
     page.setDefaultTimeout(3000);
+    page.setDefaultNavigationTimeout(30000);
     await page.goto(url);
     await login(page, username, password);
     await page.waitForSelector('[data-list-id="chat-messages"]', {visible: true, timeout: 30000});
