@@ -12,11 +12,8 @@ module.exports = async function (url, username, password, userDataDir) {
     page.setDefaultTimeout(3000);
     await page.goto(url);
     await login(page, username, password);
-    await page.waitForSelector('.username-h_Y3Us', {visible: true, timeout: 30000});
-    const listUserEH = await page.$$('.username-h_Y3Us');
-    const lastUserEH = listUserEH[listUserEH.length - 1];
-    page.currentUser = await (await lastUserEH.getProperty('textContent')).jsonValue();
-    page.targetUser = '';
+    await page.waitForSelector('[data-list-id="chat-messages"]', {visible: true, timeout: 30000});
+    await page.waitForSelector('.messageListItem-ZZ7v6g', {visible: true, timeout: 30000});
     console.log(`${username} READY!!!!`);
     return page;
 }
